@@ -17,24 +17,17 @@ export default class MovieList extends Component {
       }
     };
   }
-
   componentDidMount() {
     axios
       .get("http://localhost:5000/api/movies")
       .then(res => this.setState({ movies: res.data }))
       .catch(err => console.log(err.response));
   }
-  componentDidUpdate() {
-    axios
-      .get("http://localhost:5000/api/movies")
-      .then(res => this.setState({ movies: res.data }))
-      .catch(err => console.log(err.response));
-  }
-  //add movie
+
   addMovie = movie => {
     axios
       .post(`http://localhost:5000/api/movies`, movie)
-      .then(res => {this.setState({ movie: res.data }); console.log(res)})
+      .then(res => {this.setState({ movies: res.data }); console.log(res)})
       .catch(err => console.log(err.response));
   };
   //handle form submission
@@ -65,6 +58,7 @@ export default class MovieList extends Component {
   };
 
   render() {
+    console.log('State in MovieList.js:',this.state)
     return (
      <div>
       {(this.state.isAdding) ? 
