@@ -64,6 +64,9 @@ export default class Movie extends React.Component {
         <Link to={`/update-movie/${this.state.movie.id}`}>
           <button>Configure Movie</button>
         </Link>
+        <Link to={`/`}>
+          <button>Home</button>
+        </Link>
         </div>
       </div>
       </>
