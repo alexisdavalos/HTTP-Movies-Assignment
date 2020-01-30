@@ -14,6 +14,7 @@ button{
   background-color: #333;
   color:white;
   width:150px;
+  cursor:pointer;
 }
 a{
   color:#333;
@@ -35,6 +36,17 @@ a{
   margin:2%;
 }
 
+.newMovie{
+  button{
+    background:white;
+    color: #333;
+    font-weight:600;
+  }
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2%; 
+}
 .movie-list{
   display:flex;
   justify-content: center;
@@ -59,7 +71,7 @@ a{
   display:flex;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  height: 100vh;
   form{
     display:flex;
     justify-content: center;
@@ -69,7 +81,14 @@ a{
     padding: 5%;
     background: white;
     input{
-      margin: 20px;
+      margin: 10px;
+      width: 75%;
+      padding: 3%;
+    }
+    label{
+      width: 80%;
+      text-align: left;
+      font-weight: 600;
     }
   }
 }

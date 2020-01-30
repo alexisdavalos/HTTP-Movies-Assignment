@@ -78,17 +78,7 @@ export default class Movie extends React.Component {
       editing: false
     })
   }
-  // //handle stars update
-  // handleStars = e =>{
-  //   e.preventDefault();
-  //   let arr = e.target.value.split(',')
-  //   console.log('arr is:', arr)
-  //   this.setState({
-  //     movie: {...this.state.movie, stars: e.target.value.split(",")},
-  //   });
-  //   console.log(`${e.target.name} is:`, e.target.value);
-  // }
-  //handle delete
+
   handleDelete = e => {
     e.preventDefault()
     this.deleteMovie(this.state.movie.id)
@@ -135,7 +125,7 @@ export default class Movie extends React.Component {
             value={this.state.movie.stars}
             onChange={this.handleChanges}
           />
-          <button>submit</button>
+          <button>Save Movie</button>
         </form>
         </div> :   
         
@@ -145,10 +135,14 @@ export default class Movie extends React.Component {
           Save
         </div>
         <div className='movie-control'>
+        <h3>Edit Mode On: Select Commands</h3>
         <Link onClick={() => this.setState({editing: true})} to={`/update-movie/${this.state.movie.id}`}>
           <button>Edit</button>
         </Link>
           <button onClick={this.handleDelete}>Delete</button>
+        <Link onClick={() => this.setState({editing: false})} to={`/movies/${this.state.movie.id}`}>
+        <button>Exit</button>
+        </Link>
         </div>
       </div> }
       </>

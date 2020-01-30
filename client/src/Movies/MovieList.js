@@ -6,7 +6,15 @@ export default class MovieList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: []
+      movies: [],
+      isAdding: false,
+      movie: {
+        id: '',
+        title: '',
+        director: '',
+        metascore: '',
+        stars: []
+      }
     };
   }
 
@@ -19,11 +27,54 @@ export default class MovieList extends Component {
 
   render() {
     return (
+     <div>
+      {(this.state.isAdding) ? 
+      <div className='form-wrapper'>
+      <form onSubmit={this.handleSubmit}>
+        <h3>Add New Film</h3>
+        <label>Title</label>
+        <input 
+          type='text'
+          name='title'
+          value={this.state.movie.title}
+          onChange={this.handleChanges}
+        />
+        <label>Director</label>
+        <input 
+          type='text'
+          name='director'
+          value={this.state.movie.director}
+          onChange={this.handleChanges}
+        />
+        <label>Metascore</label>
+        <input 
+          type='text'
+          name='metascore'
+          value={this.state.movie.metascore}
+          onChange={this.handleChanges}
+        />
+        <label>Stars</label>
+        <input 
+          type='text'
+          name='stars'
+          value={this.state.movie.stars}
+          onChange={this.handleChanges}
+        />
+        <button>Add Movie</button>
+      </form>
+      </div> :
+      <>   
+      <div className='newMovie'>
+      <button onClick={() => this.setState({...this.state, isAdding: true})}>Add New Movie</button>
+      </div>
       <div className="movie-list">
         {this.state.movies.map(movie => (
           <MovieDetails key={movie.id} movie={movie} />
         ))}
       </div>
+      </>
+      }
+     </div>
     );
   }
 }
