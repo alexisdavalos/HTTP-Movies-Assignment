@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 const MovieCard = props => {
   const { title, director, metascore, stars } = props.movie;
+  const [edit, setEdit] = useState(false);
   return (
     <div className="movie-card">
       <h2>{title}</h2>
