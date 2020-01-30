@@ -24,6 +24,45 @@ export default class MovieList extends Component {
       .then(res => this.setState({ movies: res.data }))
       .catch(err => console.log(err.response));
   }
+  componentDidUpdate() {
+    axios
+      .get("http://localhost:5000/api/movies")
+      .then(res => this.setState({ movies: res.data }))
+      .catch(err => console.log(err.response));
+  }
+  //add movie
+  addMovie = movie => {
+    axios
+      .post(`http://localhost:5000/api/movies`, movie)
+      .then(res => {this.setState({ movie: res.data }); console.log(res)})
+      .catch(err => console.log(err.response));
+  };
+  //handle form submission
+  handleSubmit = e =>{
+    e.preventDefault()
+    this.addMovie(this.state.movie)
+    this.setState({
+      ...this.state,
+      isAdding: false
+    })
+    this.props.history.push('/')
+  }
+
+  //handle form changes
+  handleChanges = e => {
+    e.preventDefault();
+    if(e.target.name !== 'stars'){
+      this.setState({
+        movie: {...this.state.movie, [e.target.name]: e.target.value},
+      });
+      console.log(`${e.target.name} is:`, e.target.value);
+    }else{
+      this.setState({
+        movie: {...this.state.movie, stars: e.target.value.split(",")},
+      });
+      console.log(`${e.target.name} is:`, e.target.value);
+    }
+  };
 
   render() {
     return (
@@ -60,12 +99,15 @@ export default class MovieList extends Component {
           value={this.state.movie.stars}
           onChange={this.handleChanges}
         />
+        <div className='formButtonsWrapper'>
         <button>Add Movie</button>
+        <button onClick={()=> this.setState({...this.state, isAdding:false})}>Exit</button>
+        </div>
       </form>
       </div> :
       <>   
       <div className='newMovie'>
-      <button onClick={() => this.setState({...this.state, isAdding: true})}>Add New Movie</button>
+        <button onClick={() => this.setState({...this.state, isAdding: true})}>Add New Movie</button>
       </div>
       <div className="movie-list">
         {this.state.movies.map(movie => (

@@ -90,6 +90,13 @@ a{
       text-align: left;
       font-weight: 600;
     }
+    .formButtonsWrapper{
+      display:flex;
+      justify-content: center;
+      button{
+        margin: 1%;
+      }
+    }
   }
 }
 .saved-list {
